@@ -70,3 +70,14 @@
       0
       (+ 1 (max (tree-height (cadr tree))
                 (tree-height (caddr tree))))))
+
+                
+; leaf-count: returns the number of leaves of a binary tree.
+; A leaf is a node whose left and right subtrees are both (); the empty tree has no leaves.
+; Arguments: tree, either () or (value left right). Returns an integer >= 0.
+; Reads: leaves(()) = 0; leaves((v () ())) = 1; otherwise leaves((v l r)) = leaves(l) + leaves(r).
+(define (leaf-count tree)
+  (cond ((null? tree) 0)
+        ((and (null? (cadr tree)) (null? (caddr tree))) 1)
+        (else (+ (leaf-count (cadr tree))
+                 (leaf-count (caddr tree))))))
