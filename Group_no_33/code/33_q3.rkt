@@ -81,3 +81,11 @@
         ((and (null? (cadr tree)) (null? (caddr tree))) 1)
         (else (+ (leaf-count (cadr tree))
                  (leaf-count (caddr tree))))))
+
+                 
+; print-height-and-leaves: prints the list (height leaf-count) of the tree on one line,
+; followed by a newline.
+; Arguments: tree, either () or (value left right). Prints with display; for () it prints (0 0).
+(define (print-height-and-leaves tree)
+  (display (list (tree-height tree) (leaf-count tree)))
+  (newline))
