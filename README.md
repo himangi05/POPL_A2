@@ -16,6 +16,6 @@ Group_no_33/
   code/      33_q1.pl  33_q2.pl  33_q3.rkt  33_q4.rkt
   tests/     p1_tests.pl  p2_tests.pl  s1_calls.rkt  s1_expected.txt  run_s1.sh  s2_calls.rkt  run_s2.sh
   skills/    prolog-dev/SKILL.md  scheme-dev/SKILL.md
-  prompts/   P1.md  P2.md  S1.md  S2.md  skills.md
+  prompts/   P1.md  P2.md  S1.md  S2.md
   P1_REPORT.md
   README.md
