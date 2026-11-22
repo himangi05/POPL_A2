@@ -56,3 +56,23 @@
     (display (insert-if-short x lst n))
     (newline)))
 
+; make-inserter: builds a function that inserts x at the front of every list whose length
+; satisfies len-ok?, at every level of nesting, including the top-level list.
+; Arguments: x, any atom; len-ok?, a function taking one number (a list's length) and
+; returning true or false. Returns a function of one argument, a (possibly nested) list.
+; The length is measured on the ORIGINAL list, before any insertion, using my-length.
+; letrec lets the returned function call itself on every sublist.
+(define (make-inserter x len-ok?)
+  (letrec ((insert
+            (lambda (lst)
+              (let ((processed
+                     (my-map (lambda (e)
+                               (if (or (pair? e) (null? e))
+                                   (insert e)
+                                   e))
+                             lst)))
+                (if (len-ok? (my-length lst))
+                    (cons x processed)
+                    processed)))))
+    insert))
+
