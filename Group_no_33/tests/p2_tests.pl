@@ -1,6 +1,6 @@
 % tests/p2_tests.pl: plunit tests for 33_q2.pl (Problem P2, arithmetic equations).
 % Run from the repo root:
-%   swipl -q -f Group_no_5/tests/p2_tests.pl -g run_tests -t halt
+%   swipl -q -f Group_no_33/tests/p2_tests.pl -g run_tests -t halt
 
 :- use_module(library(plunit)).
 :- use_module(library(lists)).

@@ -1,5 +1,3 @@
-:- use_module(library(lists)).
-
 % expr(+Nums, -Tree, -Value): generates, on backtracking, every expression tree over Nums (in order) and its integer value.
 % Reads: expr(Nums, Tree, Value) holds when Tree is an expression over the non-empty list Nums, with the numbers in order, and Value is its value.
 expr([N], num(N), N).
