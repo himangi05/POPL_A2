@@ -69,3 +69,9 @@ main :-
     once(( candidate(Sol), satisfies([1,2,3,4,5,6,7,8], Sol) )),
     forall(member(p(Name, Dept, Lang, Project), Sol),
            format("~w = [~w, ~w, ~w]~n", [Name, Dept, Lang, Project])).
+
+% count_solutions(+Active, -N): N is the number of solutions that satisfy exactly the clues listed in Active.
+% Reads: count_solutions(Active, N) holds when N is the length of the list of all candidates Sol with satisfies(Active, Sol).
+count_solutions(Active, N) :-
+    findall(Sol, ( candidate(Sol), satisfies(Active, Sol) ), Sols),
+    length(Sols, N).
