@@ -27,3 +27,20 @@
     (if (null? rest)
         (my-reverse acc)
         (loop (cdr rest) (cons (f (car rest)) acc)))))
+
+; insert-if-short: inserts x at the front of every list whose length is less than n,
+; at every level of nesting, including the top-level list.
+; Arguments: x, any atom; lst, a (possibly nested) list of atoms and lists, no dotted pairs;
+; n, an integer >= 0. Returns a new list; lst itself is not changed.
+; The length of each list is measured on the ORIGINAL list, before any insertion, using my-length.
+; Sublists are processed first with my-map; atoms are left as they are.
+(define (insert-if-short x lst n)
+  (let ((processed
+         (my-map (lambda (e)
+                   (if (or (pair? e) (null? e))
+                       (insert-if-short x e n)
+                       e))
+                 lst)))
+    (if (< (my-length lst) n)
+        (cons x processed)
+        processed)))
