@@ -34,3 +34,17 @@
         (cons (car t)
               (walk (cadr t)
                     (walk (caddr t) acc))))))
+
+                    
+; postorder-list: returns the list of the values of a binary tree in postorder
+; (left subtree, right subtree, node).
+; Arguments: tree, either () or (value left right).
+; Same accumulator idea as inorder-list, so no append or reverse is needed.
+; Reads: postorder(tree, acc) = postorder(left, postorder(right, (value . acc))), and postorder((), acc) = acc.
+(define (postorder-list tree)
+  (let walk ((t tree) (acc '()))
+    (if (null? t)
+        acc
+        (walk (cadr t)
+              (walk (caddr t)
+                    (cons (car t) acc))))))
