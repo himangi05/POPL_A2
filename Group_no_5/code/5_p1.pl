@@ -31,3 +31,29 @@ clue(3, Sol) :-
 clue(4, Sol) :-
     member(p('Ben', Dept, _, web), Sol),
     Dept \== testing.
+
+% Clue 5: The friend whose favorite language is Java works in the design department.
+% Reads: clue(5, Sol) holds when the friend with language java is in design.
+clue(5, Sol) :-
+    member(p(_, design, java, _), Sol).
+
+% Clue 6: Carla's project preference is not embedded, and her department is not development.
+% Reads: clue(6, Sol) holds when 'Carla' has a project other than embedded and a department other than development.
+clue(6, Sol) :-
+    member(p('Carla', Dept, _, Proj), Sol),
+    Proj \== embedded,
+    Dept \== development.
+
+% Clue 7: Dana's favorite language is not Java, and she works in research or testing.
+% Reads: clue(7, Sol) holds when 'Dana' has a language other than java and her department is research or testing.
+clue(7, Sol) :-
+    member(p('Dana', Dept, Lang, _), Sol),
+    Lang \== java,
+    ( Dept == research ; Dept == testing ).
+
+% Clue 8: The friend who prefers data projects works in research and does not use JavaScript.
+% Reads: clue(8, Sol) holds when the friend with project data is in research and their language is not javascript.
+clue(8, Sol) :-
+    member(p(_, Dept, Lang, data), Sol),
+    Dept == research,
+    Lang \== javascript.
