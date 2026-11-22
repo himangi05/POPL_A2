@@ -1,0 +1,13 @@
+# Racket build output
+compiled/
+*.zo
+*.dep
+
+# editor and OS junk
+.vscode/
+.DS_Store
+Thumbs.db
+
+# scratch files
+tmp/
+*.tmp
