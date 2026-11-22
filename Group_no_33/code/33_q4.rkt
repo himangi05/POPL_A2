@@ -44,3 +44,15 @@
     (if (< (my-length lst) n)
         (cons x processed)
         processed)))
+
+
+; print-insert-result: reads x, lst and n from standard input (in that order, with read),
+; then prints (insert-if-short x lst n) with display, followed by a newline.
+; Arguments: none. Prints nothing else (no prompts). let* makes the reading order explicit.
+(define (print-insert-result)
+  (let* ((x (read))
+         (lst (read))
+         (n (read)))
+    (display (insert-if-short x lst n))
+    (newline)))
+
