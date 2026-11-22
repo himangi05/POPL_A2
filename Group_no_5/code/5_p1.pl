@@ -57,3 +57,8 @@ clue(8, Sol) :-
     member(p(_, Dept, Lang, data), Sol),
     Dept == research,
     Lang \== javascript.
+
+% satisfies(+Active, +Sol): Sol satisfies every clue whose number is in Active.
+% Reads: satisfies(Active, Sol) holds when clue(N, Sol) holds for each N that is a member of Active.
+satisfies(Active, Sol) :-
+    forall(member(N, Active), clue(N, Sol)).
