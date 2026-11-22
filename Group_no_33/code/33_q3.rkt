@@ -13,3 +13,10 @@
         (walk (cadr t)
               (cons (car t)
                     (walk (caddr t) acc))))))
+
+
+; print-inorder: prints the inorder list of the tree's values on one line, then a newline.
+; Arguments: tree, either () or (value left right). Prints with display; for () it prints ().
+(define (print-inorder tree)
+  (display (inorder-list tree))
+  (newline))
