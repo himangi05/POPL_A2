@@ -60,3 +60,13 @@
   (newline)
   (display (postorder-list tree))
   (newline))
+
+  
+; tree-height: returns the height of a binary tree.
+; Arguments: tree, either () or (value left right). Returns an integer >= 0.
+; Reads: height(()) = 0, and height((v l r)) = 1 + max(height(l), height(r)).
+(define (tree-height tree)
+  (if (null? tree)
+      0
+      (+ 1 (max (tree-height (cadr tree))
+                (tree-height (caddr tree))))))
