@@ -9,7 +9,6 @@
         count
         (loop (cdr rest) (+ count 1)))))
 
-
 ; my-reverse: helper that returns lst with its elements in reverse order.
 ; Arguments: lst, a proper list. Returns a new list. Tail-recursive (accumulator).
 (define (my-reverse lst)
@@ -27,34 +26,6 @@
     (if (null? rest)
         (my-reverse acc)
         (loop (cdr rest) (cons (f (car rest)) acc)))))
-
-; insert-if-short: inserts x at the front of every list whose length is less than n,
-; at every level of nesting, including the top-level list.
-; Arguments: x, any atom; lst, a (possibly nested) list of atoms and lists, no dotted pairs;
-; n, an integer >= 0. Returns a new list; lst itself is not changed.
-; The length of each list is measured on the ORIGINAL list, before any insertion, using my-length.
-; Sublists are processed first with my-map; atoms are left as they are.
-(define (insert-if-short x lst n)
-  (let ((processed
-         (my-map (lambda (e)
-                   (if (or (pair? e) (null? e))
-                       (insert-if-short x e n)
-                       e))
-                 lst)))
-    (if (< (my-length lst) n)
-        (cons x processed)
-        processed)))
-
-
-; print-insert-result: reads x, lst and n from standard input (in that order, with read),
-; then prints (insert-if-short x lst n) with display, followed by a newline.
-; Arguments: none. Prints nothing else (no prompts). let* makes the reading order explicit.
-(define (print-insert-result)
-  (let* ((x (read))
-         (lst (read))
-         (n (read)))
-    (display (insert-if-short x lst n))
-    (newline)))
 
 ; make-inserter: builds a function that inserts x at the front of every list whose length
 ; satisfies len-ok?, at every level of nesting, including the top-level list.
@@ -76,3 +47,20 @@
                     processed)))))
     insert))
 
+; insert-if-short: inserts x at the front of every list whose length is less than n,
+; at every level of nesting, including the top-level list.
+; Arguments: x, any atom; lst, a (possibly nested) list of atoms and lists, no dotted pairs;
+; n, an integer >= 0. Returns a new list; lst itself is not changed.
+; Defined with make-inserter: the length test is (lambda (k) (< k n)).
+(define (insert-if-short x lst n)
+  ((make-inserter x (lambda (k) (< k n))) lst))
+
+; print-insert-result: reads x, lst and n from standard input (in that order, with read),
+; then prints (insert-if-short x lst n) with display, followed by a newline.
+; Arguments: none. Prints nothing else (no prompts). let* makes the reading order explicit.
+(define (print-insert-result)
+  (let* ((x (read))
+         (lst (read))
+         (n (read)))
+    (display (insert-if-short x lst n))
+    (newline)))
