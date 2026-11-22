@@ -48,3 +48,15 @@
         (walk (cadr t)
               (walk (caddr t)
                     (cons (car t) acc))))))
+
+                    
+; print-all-traversals: prints three lines: the inorder list, the preorder list, then the
+; postorder list of the tree's values, each followed by a newline.
+; Arguments: tree, either () or (value left right). Prints with display; for () each line is ().
+(define (print-all-traversals tree)
+  (display (inorder-list tree))
+  (newline)
+  (display (preorder-list tree))
+  (newline)
+  (display (postorder-list tree))
+  (newline))
