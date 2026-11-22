@@ -58,15 +58,20 @@ clue(8, Sol) :-
     Dept == research,
     Lang \== javascript.
 
+% Reads: clue(9, Sol) holds when the friend with project 'AI' works in the testing department.
+% CLUE 9: The friend who prefers the AI project works in the testing department.
+clue(9, Sol) :-
+    member(p(_, testing, _, 'AI'), Sol).
+
 % satisfies(+Active, +Sol): Sol satisfies every clue whose number is in Active.
 % Reads: satisfies(Active, Sol) holds when clue(N, Sol) holds for each N that is a member of Active.
 satisfies(Active, Sol) :-
     forall(member(N, Active), clue(N, Sol)).
 
-% main: prints one solution of clues 1 to 8, one line per friend in the order Alex, Ben, Carla, Dana.
-% Reads: main succeeds when some candidate Sol satisfies clues 1 to 8, and it prints that Sol as four lines.
+% main: prints one solution of clues 1 to 9, one line per friend in the order Alex, Ben, Carla, Dana.
+% Reads: main succeeds when some candidate Sol satisfies clues 1 to 9, and it prints that Sol as four lines.
 main :-
-    once(( candidate(Sol), satisfies([1,2,3,4,5,6,7,8], Sol) )),
+    once(( candidate(Sol), satisfies([1,2,3,4,5,6,7,8,9], Sol) )),
     forall(member(p(Name, Dept, Lang, Project), Sol),
            format("~w = [~w, ~w, ~w]~n", [Name, Dept, Lang, Project])).
 
