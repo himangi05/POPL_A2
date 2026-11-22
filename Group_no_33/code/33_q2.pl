@@ -50,3 +50,15 @@ op_prec(+, 1).
 op_prec(-, 1).
 op_prec(*, 2).
 op_prec(/, 2).
+
+% generate_equation(+List, -Equation): Equation is a string "L=R" where L and R are expressions over a split of List into two consecutive non-empty parts, with equal values.
+% Reads: generate_equation(List, Equation) holds when List splits into non-empty Left and Right, some tree over Left and some tree over Right have the same value, and Equation is the text of the left tree, "=", and the text of the right tree.
+generate_equation(List, Equation) :-
+    append(Left, Right, List),
+    Left = [_|_],
+    Right = [_|_],
+    expr(Left, LeftTree, Value),
+    expr(Right, RightTree, Value),
+    tree_string(LeftTree, LeftString),
+    tree_string(RightTree, RightString),
+    format(string(Equation), "~w=~w", [LeftString, RightString]).
